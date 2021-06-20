@@ -17,8 +17,8 @@ Project is created with:
 ## Setup, clone this repository
 create a new repository on the command line
 
-[$ git init]
-[$ git add README.md]
+git init
+$ git add README.md
 $ git commit -m "first commit"
 $ git branch -M main
 $ git remote add origin https://github.com/simplyunix/AIX71_TO_AIX72_MIGRATION.git
