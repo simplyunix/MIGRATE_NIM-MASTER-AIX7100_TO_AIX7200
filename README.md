@@ -1,24 +1,22 @@
-# AIX71_TO_AIX72_MIGRATION
+# NIM SERVER AIX71_TO_AIX72_MIGRATION
 
 ## Table of contents
 * [General info](#general-info)
 
 ## General info
-[Add information of the project here]
+[How to migrated AIX NIM Master from AIX7100 to AIX7200]
 ## Author
 Sasi Chand
 SC - Expert, Technical lead, architect or any combination of those
 ## Technologies
 Project is created with:
-* Example centos, ansible, chef
-* [ ]
-* [ ]
+* [Virtual I/O servers VML]
 ## Notes
-* []
+* [RTFM]
 
-## Setup
-```
-…or create a new repository on the command line
+## Setup, clone this repository
+
+create a new repository on the command line
 
 echo "# AIX71_TO_AIX72_MIGRATION" >> README.md
 $ git init
