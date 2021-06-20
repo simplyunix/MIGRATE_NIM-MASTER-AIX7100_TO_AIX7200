@@ -15,8 +15,8 @@ Project is created with:
 * [RTFM]
 
 ## Setup, clone this repository
-# create a new repository on the command line
-[$ git init
+create a new repository on the command line
+!$ git init
 $ git add README.md
 $ git commit -m "first commit"
 $ git branch -M main
