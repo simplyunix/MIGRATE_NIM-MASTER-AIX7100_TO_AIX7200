@@ -4,7 +4,7 @@
 * [General info](#general-info)
 
 ## General info
-[How to migrated AIX NIM Master from AIX7100 to AIX7200]
+How to migrated AIX NIM Master from AIX7100 to AIX7200
 ## Author
 Sasi Chand
 SC - Expert, Technical lead, architect or any combination of those
