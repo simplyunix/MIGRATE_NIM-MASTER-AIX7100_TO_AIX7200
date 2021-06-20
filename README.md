@@ -15,9 +15,7 @@ Project is created with:
 * [RTFM]
 
 ## Setup, clone this repository
-
-create a new repository on the command line
-
+# create a new repository on the command line
 echo "# AIX71_TO_AIX72_MIGRATION" >> README.md
 $ git init
 $ git add README.md
