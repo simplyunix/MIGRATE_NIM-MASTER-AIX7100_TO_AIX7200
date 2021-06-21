@@ -68,3 +68,15 @@ AIX Version 7.2 requires a minimum of 20 GB of physical disk space for a default
 
 Commit
 remove iFix's if any
+
+Now the Actual Migration tasks starts here
+#-----------------------------------------------
+Boot to sms, to boot off the cdrom and normal mode boot
+
+1. Enter 1 to define the system console
+2. Enter 1 for English install
+3. Choose the correct disk
+4. Migration install
+5. On the VIOS load the CD/DVD2
+loadopt -f disk base_AIX72_TL5_CD2 -vtd vhost10
+6. Press Enter now and the Migration will continue

@@ -61,11 +61,13 @@ echo "Lets clean the ODM.... Remove to free up this disk"
 echo
 lspv | grep old_rootvg| awk '{print $1}'| while read hdisk
 do
-  echo "Tidy up for cloning $hdisk"
-  alt_rootvg_op -X old_rootvg
-  alt_disk_copy -Bd $hdisk
-  echo
+  echo "Removing old altinst_rootvg $hdisk"
+  alt_rootvg_op -X altinst_rootvg
+  alt_disk_copy  -e /etc/exclude.rootvg -Bd $hdisk
+  echo "-----------------------------------------"
   lspv
+  echo "-----------------------------------------"
+  bootlist -m normal -o
 done
 
 }
