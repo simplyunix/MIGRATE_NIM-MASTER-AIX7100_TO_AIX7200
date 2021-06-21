@@ -62,8 +62,8 @@ echo
 lspv | grep old_rootvg| awk '{print $1}'| while read hdisk
 do
   echo "Tidy up for cloning $hdisk"
-  echo alt_rootvg_op -X old_rootvg
-  echo alt_disk_copy -Bd $hdisk
+  alt_rootvg_op -X old_rootvg
+  alt_disk_copy -Bd $hdisk
   echo
   lspv
 done
