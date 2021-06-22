@@ -44,11 +44,11 @@ VTD = vhost10
 - $ loadopt -vtd vhost10 -disk base_AIX72_TL5_CD1
 
 On the NIM Master
-- # cfgmgr
-- # lsdev -Cc cdrom
-- # cd0 Available  Virtual SCSI Optical Served by VIO Server
-- # mount /cdrom
-- # cat /cdrom/OSLEVEL
+- cfgmgr
+- lsdev -Cc cdrom
+- cd0 Available  Virtual SCSI Optical Served by VIO Server
+- mount /cdrom
+- cat /cdrom/OSLEVEL
     OSLEVEL=7.2.0.0
 
 We are ready to migrate:
@@ -58,7 +58,7 @@ We are ready to migrate:
 - A minimum current memory requirement for AIX 7 with 7200-05 is 2 GB.
 - AIX 7 with 7200-05 creates a 512 MB paging space (in the /dev/hd6 directory) for all new and complete overwrite installations.
 - AIX Version 7.2 requires a minimum of 20 GB of physical disk space for a default installation
-- # commit [Commit to apply any Software]
+- commit [Commit to apply any Software]
 - remove iFix's if any [emgr]
 
 # Now the Actual Migration tasks starts here
@@ -70,14 +70,14 @@ We are ready to migrate:
 1. Enter 1 to define the system console
 2. Enter 1 for English install
 3. Choose the correct disk
->>> 2 Change/Show Installation Settings and Install
-Choose 1 System Settings
-Choose 3 >>> 3 Migration Install
-Here choose the correct disk
+- 2 Change/Show Installation Settings and Install
+--> Choose 1 System Settings
+--> Choose 3 [3 Migration Install]
+- [Here choose the correct disk! Choosing the correct disk is critical for roll back]
 
 4. Migration install
-Choose to continue Install Choose 0
+- Choose to continue Install Choose 0
 
 5. On the VIOS load the CD/DVD2
-$ loadopt -f disk base_AIX72_TL5_CD2 -vtd vhost10
-6. Press Enter now and the Migration will continue
+- $ loadopt -f disk base_AIX72_TL5_CD2 -vtd vhost10
+- 6. Press Enter now and the Migration will continue
