@@ -8,6 +8,10 @@ How to migrated AIX NIM Master from AIX7100 to AIX7200
 ## Author
 Sasi Chand
 SC - Expert, Technical lead, architect or any combination of those
+## Pre and Post requirements
+- Migrate SDDPCM to AIXPCM [Scripted by Sasi]
+- Run pre_scr_mig72 [Prepares the server for migration]
+- Run post_scr_mig72 [Creates NIM Resources]
 ## Technologies
 Project is created with:
 * [Virtual I/O servers VML]
@@ -80,4 +84,4 @@ We are ready to migrate:
 
 5. On the VIOS load the CD/DVD2
 - $ loadopt -f disk base_AIX72_TL5_CD2 -vtd vhost10
-- 6. Press Enter now and the Migration will continue
+6. Press Enter now and the Migration will continue
