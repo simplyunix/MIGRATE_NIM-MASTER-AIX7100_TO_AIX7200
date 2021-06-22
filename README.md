@@ -30,6 +30,7 @@ AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso
 $ lsrep
 
 Size(mb) Free(mb) Parent Pool         Parent Size      Parent Free
+
 100967    86073 mediarepo                102272              896
 
 Name                                                  File Size Optical         Access
