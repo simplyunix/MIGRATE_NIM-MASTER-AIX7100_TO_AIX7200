@@ -11,24 +11,98 @@ SC - Expert, Technical lead, architect or any combination of those
 ## Technologies
 Project is created with:
 * [Virtual I/O servers VML]
+* [NFS]
+* [NIM command line]
 ## Notes
 * [RTFM]
 
-## Setup, clone this repository
-create a new repository on the command line
+## Setup
+The first step requires that you download the latest AIX 7.2 ISO images from the IBM
+Entitled Software Support (ESS) website (http://www304.ibm.com/servers/eserver/ess/index.wss)
+NOTE: Remember to unzip the .ZIP iso File - Wired this! Don't ask me why!
 
-git init
-$ git add README.md
-$ git commit -m "first commit"
-$ git branch -M main
-$ git remote add origin https://github.com/simplyunix/AIX71_TO_AIX72_MIGRATION.git
-$ git push -u origin main]
+On the VIOS server
+$ ls -ltr /var/vio/VMLibrary
+AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_1.iso
+AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso
 
-…or push an existing repository from the command line
-$  git remote add origin https://github.com/simplyunix/AIX71_TO_AIX72_MIGRATION.git
-$ git branch -M main
-$ git push -u origin main
+$ lsrep
+Size(mb) Free(mb) Parent Pool         Parent Size      Parent Free
+  100967    86073 mediarepo                102272              896
 
-…or import code from another repository
-$ You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+Name                                                  File Size Optical         Access
+AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_1.iso            2141 None            rw
+AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso            4100 None            rw
 
+$ mkvopt -name base_AIX72_TL5_CD1 -file /var/vio/VMLibrary/AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_1.iso
+$ mkvopt -name base_AIX72_TL5_CD2 -file /var/vio/VMLibrary/AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso
+
+$ lsrep
+Size(mb) Free(mb) Parent Pool         Parent Size      Parent Free
+  100969    79834 mediarepo                102272              896
+
+Name                                                  File Size Optical         Access
+AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_1.iso            2141 None            rw
+AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso            4100 None            rw
+GDR_V1.2.iso                                                 57 None            rw
+Solutions_Enabler_se9000-AIX-powerpc-ni.tar.gz              144 None            rw
+aix-7100-04-04_disk1                                       4044 None            rw
+aix-7100-04-04_disk2                                       4408 None            rw
+base_AIX72_TL5_CD1                                         2141 None            ro
+base_AIX72_TL5_CD2                                         4100 None            ro
+
+Your call to use the HMC GUI or VIOS CLI
+Add a Optical device to the LPAR in this case vhost10 on kapnim
+
+On the VIOS
+$ lsmap -all
+
+SVSA            Physloc                                      Client Partition ID
+--------------- -------------------------------------------- ------------------
+vhost5          U8284.22A.682FDCX-V1-C19                     0x00000003
+
+VTD                   vhost10
+Status                Available
+LUN                   0x8100000000000000
+Backing device
+Physloc
+Mirrored              N/A
+
+$ loadopt -vtd vhost10 -disk base_AIX72_TL5_CD1
+
+On the NIM Master
+# cfgmgr
+# lsdev -Cc cdrom
+# cd0 Available  Virtual SCSI Optical Served by VIO Server
+# mount /cdrom
+# cat /cdrom/OSLEVEL
+OSLEVEL=7.2.0.0
+
+We are ready to migrate:
+---------------------------------------------------------------
+Note for the LPARS with less than 4GB of memory we need to tweak a few things
+A minimum current memory requirement for AIX 7 with 7200-05 is 2 GB.
+AIX 7 with 7200-05 creates a 512 MB paging space (in the /dev/hd6 directory) for all new and complete overwrite installations.
+AIX Version 7.2 requires a minimum of 20 GB of physical disk space for a default installation
+
+Commit
+remove iFix's if any
+
+Now the Actual Migration tasks starts here
+#-----------------------------------------------
+Boot to sms, to boot off the cdrom and normal mode boot
+
+1. Enter 1 to define the system console
+2. Enter 1 for English install
+3. Choose the correct disk
+>>> 2 Change/Show Installation Settings and Install
+Choose 1 System Settings
+Choose 3 >>> 3 Migration Install
+Here choose the correct disk
+
+4. Migration install
+Choose to continue Install Choose 0
+
+5. On the VIOS load the CD/DVD2
+$ loadopt -f disk base_AIX72_TL5_CD2 -vtd vhost10
+6. Press Enter now and the Migration will continue
