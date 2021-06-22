@@ -31,8 +31,8 @@ $ mkvopt -name base_AIX72_TL5_CD1 -file /var/vio/VMLibrary/AIX_v7.2_BASE_Install
 $ mkvopt -name base_AIX72_TL5_CD2 -file /var/vio/VMLibrary/AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso
 
 $ lsrep
-base_AIX72_TL5_CD1                                         2141 None            ro
-base_AIX72_TL5_CD2                                         4100 None            ro
+- base_AIX72_TL5_CD1                                         2141 None            ro
+- base_AIX72_TL5_CD2                                         4100 None            ro
 
 Your call to use the HMC GUI or VIOS CLI
 Add a Optical device to the LPAR in this case vhost10 on kapnim
