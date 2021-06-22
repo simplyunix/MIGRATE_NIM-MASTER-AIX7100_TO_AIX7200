@@ -35,6 +35,7 @@ cp /etc/resolv.conf $savedir
 
 echo "####### Save System config"
 cp /etc/environment $savedir
+cp /etc/exports $savedir
 cp /etc/ntp.conf $savedir
 cp /etc/netsvc.conf  $savedir
 cp /etc/exports $savedir
@@ -44,6 +45,9 @@ cp /etc/mount.map $savedir
 cp /etc/auto_master $savedir
 cp /etc/inittab $savedir
 
+echo "####### Clean up old pre migration data to make space in /home"
+rm -rf /home/pre_migration.*
+
 echo "####### Run the pre migration checks and review the outputs"
 /cdrom/usr/lpp/bos/pre_migration
 
@@ -52,23 +56,38 @@ mksysb -i $savedir/`hostname`.pre_migration.mksysb
 
 echo "####### Backup the NIM database"
 /usr/lpp/bos.sysmgt/nim/methods/m_backup_db '/stage/kapnim/nimmast.nim.db.backup'
+echo "-----------------------------------------"
 
-echo "####### Lets create a clone of rootvg with a -B flag"
+echo "####### Sanity checks list all physical volumes and rootvg's before cloning"
+lspv
+echo "-----------------------------------------"
 
-lspv | grep old_rootvg
+echo "####### Lets tidy up old_rootvg or altinst_rootvg. Logs what's in play"
+lspv | grep _rootvg
 echo
+echo "-----------------------------------------"
 echo "Lets clean the ODM.... Remove to free up this disk"
 echo
-lspv | grep old_rootvg| awk '{print $1}'| while read hdisk
+echo "-----------------------------------------"
+lspv | grep _rootvg| awk '{print $1}'| while read hdisk
 do
   echo "Removing old altinst_rootvg $hdisk"
   alt_rootvg_op -X altinst_rootvg
-  alt_disk_copy  -e /etc/exclude.rootvg -Bd $hdisk
-  echo "-----------------------------------------"
-  lspv
-  echo "-----------------------------------------"
-  bootlist -m normal -o
+
 done
+echo "-----------------------------------------"
+
+echo "####### Lets create a clone of rootvg with a -B flag"
+hdisk=hdisk0
+alt_disk_copy -e /etc/exclude.rootvg -Bd $hdisk
+echo "-----------------------------------------"
+
+echo "####### Sanity checks list all physical volumes rootvg's after cloning"
+lspv
+echo "-----------------------------------------"
+
+echo "####### List current boot devices"
+bootlist -m normal -o
 
 }
 

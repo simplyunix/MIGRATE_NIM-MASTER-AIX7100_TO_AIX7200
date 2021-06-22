@@ -56,8 +56,6 @@ echo bffcreate -d '/mnt/v2' -f'all' -t'/export/nim/lpp_source/AIX72TL5SP2' '-X
 echo "----------------------------------------------------------------"
 
 echo "####### Create AIX 7.2 lpp_source NIM Resource"
-# mkres -N 'AIX72TL5SP2' -t 'lpp_source' -s 'master' -l '/export/nim/lpp_source/AIX72TL5SP2'
-# nim -o define -t lpp_source -a Attribute=Value ... lpp_sourceName
 echo nim -o define -t lpp_source -a server=master -a location=/export/lpp_source/LPP_AIX72TL5SP2 -a source=/export/nim/lpp_source/AIX72TL5SP2 LPP_AIX72TL5SP2
 echo "----------------------------------------------------------------"
 
