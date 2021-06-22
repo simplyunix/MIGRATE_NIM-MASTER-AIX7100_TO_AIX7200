@@ -50,13 +50,15 @@ ls -ltr /mnt/v2
 echo "----------------------------------------------------------------"
 
 echo "####### Run bffcreate . Copy the software to the specified location for future use."
-echo bffcreate -d '/mnt/v1' -f'all' -t'/export/nim/lpp_source/AIX72TL5SP2' '-X
+bffcreate -d /mnt/v1 -t /export/nim/lpp_source/AIX72TL5SP2 -X all
 echo "----------------------------------------------------------------"
-echo bffcreate -d '/mnt/v2' -f'all' -t'/export/nim/lpp_source/AIX72TL5SP2' '-X
+bffcreate -d /mnt/v2 -t /export/nim/lpp_source/AIX72TL5SP2 -X all
 echo "----------------------------------------------------------------"
 
 echo "####### Create AIX 7.2 lpp_source NIM Resource"
-echo nim -o define -t lpp_source -a server=master -a location=/export/lpp_source/LPP_AIX72TL5SP2 -a source=/export/nim/lpp_source/AIX72TL5SP2 LPP_AIX72TL5SP2
+# mkres -N 'AIX72TL5SP2' -t 'lpp_source' -s 'master' -l '/export/nim/lpp_source/AIX72TL5SP2'
+# nim -o define -t lpp_source -a Attribute=Value ... lpp_sourceName
+nim -o define -t lpp_source -a server=master -a location=/export/lpp_source/LPP_AIX72TL5SP2 -a source=/export/nim/lpp_source/AIX72TL5SP2 LPP_AIX72TL5SP2
 echo "----------------------------------------------------------------"
 
 echo "####### Check to confirm if the lpp_source has been created successfully"
@@ -70,12 +72,11 @@ echo "####### Unmount the CD iso images..."
 umount /mnt/v1
 umount /mnt/v2
 echo "----------------------------------------------------------------"
-
 nim -o showres LPP_AIX72TL5SP2 | grep bos.mp64
 echo "----------------------------------------------------------------"
 
 echo "####### Create AIX 7.2 spot NIM Resource"
-echo nim -o define -t spot -a server=master -a location=/export/spot/SPOT_AIX72TL5SP2 -s source=LPP_AIX72TL5SP2 -a installp_flags=-aQg SPOT_AIX72TL5SP2
+nim -o define -t spot -a server=master -a location=/export/spot/SPOT_AIX72TL5SP2 -a source=LPP_AIX72TL5SP2 -a installp_flags=-aQg SPOT_AIX72TL5SP2
 echo "----------------------------------------------------------------"
 
 echo "####### Show progress"
