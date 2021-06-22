@@ -27,32 +27,10 @@ $ ls -ltr /var/vio/VMLibrary
 AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_1.iso
 AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso
 
-$ lsrep
-
-Size(mb) Free(mb) Parent Pool         Parent Size      Parent Free
-
-100967    86073 mediarepo                102272              896
-
-Name                                                  File Size Optical         Access
-
-AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_1.iso            2141 None            rw
-AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso            4100 None            rw
-
 $ mkvopt -name base_AIX72_TL5_CD1 -file /var/vio/VMLibrary/AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_1.iso
-
 $ mkvopt -name base_AIX72_TL5_CD2 -file /var/vio/VMLibrary/AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso
 
 $ lsrep
-Size(mb) Free(mb) Parent Pool         Parent Size      Parent Free
-  100969    79834 mediarepo                102272              896
-
-Name                                                  File Size Optical         Access
-AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_1.iso            2141 None            rw
-AIX_v7.2_BASE_Install_7200-05-02-2113_DVD_2.iso            4100 None            rw
-GDR_V1.2.iso                                                 57 None            rw
-Solutions_Enabler_se9000-AIX-powerpc-ni.tar.gz              144 None            rw
-aix-7100-04-04_disk1                                       4044 None            rw
-aix-7100-04-04_disk2                                       4408 None            rw
 base_AIX72_TL5_CD1                                         2141 None            ro
 base_AIX72_TL5_CD2                                         4100 None            ro
 
