@@ -48,8 +48,15 @@ cp /etc/inittab $savedir
 echo "####### Clean up old pre migration data to make space in /home"
 rm -rf /home/pre_migration.*
 
+echo "####### Mount CDROM..........................................."
+mkdir /cdrom
+crfs -v cdrfs -p ro -d  cd0 -m /cdrom
+cfgmgr
+mount /cdrom
+
 echo "####### Run the pre migration checks and review the outputs"
 /cdrom/usr/lpp/bos/pre_migration
+umount /cdrom
 
 echo "####### Backup up the system via mksysb to a remote filesystems"
 mksysb -i $savedir/`hostname`.pre_migration.mksysb
