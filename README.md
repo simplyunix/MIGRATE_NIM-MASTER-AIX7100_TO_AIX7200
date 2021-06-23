@@ -23,6 +23,7 @@ Project is created with:
 ## Setup
 The first step requires that you download the latest AIX 7.2 ISO images from the IBM
 Entitled Software Support (ESS) website (http://www304.ibm.com/servers/eserver/ess/index.wss)
+
 NOTE: Remember to unzip the .ZIP iso File - Wired this! Don't ask me why!
 
 On the VIOS server
@@ -38,7 +39,7 @@ $ lsrep
 - base_AIX72_TL5_CD1                                         2141 None            ro
 - base_AIX72_TL5_CD2                                         4100 None            ro
 
-Your call to use the HMC GUI or VIOS CLI. Add a Optical device to the LPAR in this case vhost10 on kapnim
+Your call to use the HMC GUI or VIOS CLI. Add a Optical device to the LPAR in this case voptcd on kapnim
 
 On the VIOS
 - $ lsmap -all
@@ -62,8 +63,8 @@ We are ready to migrate:
 - A minimum current memory requirement for AIX 7 with 7200-05 is 2 GB.
 - AIX 7 with 7200-05 creates a 512 MB paging space (in the /dev/hd6 directory) for all new and complete overwrite installations.
 - AIX Version 7.2 requires a minimum of 20 GB of physical disk space for a default installation
-- commit [Commit to apply any Software]
-- remove iFix's if any [emgr]
+- commit [Commit to apply any Software. [man commit]]
+- remove iFix's if any [man emgr]
 
 # Now the Actual Migration tasks starts here
 #-----------------------------------------------
