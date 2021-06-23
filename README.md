@@ -45,7 +45,7 @@ On the VIOS
 
 VTD = vhost10
 
-- $ loadopt -vtd vhost10 -disk base_AIX72_TL5_CD1
+- $ loadopt -vtd voptcd -disk base_AIX72_TL5_CD1
 
 On the NIM Master
 - cfgmgr
@@ -83,5 +83,5 @@ We are ready to migrate:
 - Choose to continue Install Choose 0
 
 5. On the VIOS load the CD/DVD2
-- $ loadopt -f disk base_AIX72_TL5_CD2 -vtd vhost10
+- $ loadopt -f disk base_AIX72_TL5_CD2 -vtd voptcd
 6. Press Enter now and the Migration will continue
