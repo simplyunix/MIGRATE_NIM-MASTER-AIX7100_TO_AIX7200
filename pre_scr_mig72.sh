@@ -1,7 +1,9 @@
 #!/usr/bin/ksh
 # Sasi Chand
 # @ eyetnz@gmail.com
-
+###############################################################
+# NOTE: Ensure that your HDISK for cloning is set correctly
+###############################################################
 logname=/stage/`hostname`/pre_scr_mig72.log
 savedir=/stage/`hostname`/save_nim_mig72
 
