@@ -18,7 +18,21 @@ Project is created with:
 * [NFS]
 * [NIM command line]
 ## Notes
-* [RTFM]
+Ensure the correct disks are shown. Both disks show as AIX 7.1. 
+However, hdisk0 is the disk we wish to migrate to AIX 7.2. 
+While hdisk3 is our cloned rootvg that we could use for backout/recovery purposes if required.
+So DON'T Choose the Cloned disk!!!
+ 
+ Change Disks Where You Want to Install
+ Type the number for the disks to be used for installation and press Enter.
+ Level Disks In Rootvg Location Code Size(MB)
+ 1 7.1 hdisk0 none 20480
+ 2 7.1 hdisk3 none 51200
+ 77 Display More Disk Information
+ 88 Help ?
+ 99 Previous Menu
+ >>> Choice []: 2 
+Entering 77 repeatedly will show you ad]
 
 ## Setup
 The first step requires that you download the latest AIX 7.2 ISO images from the IBM
